@@ -13,6 +13,63 @@ const slugify = require('slugify');
 const pageId = '575d3ec590204c938adc349bef9cabc9';
 const baseUrl = 'https://notion-api.splitbee.io/v1';
 
+export function createTableFromTabel(jsonData) {
+  // Assume that the JSON data is stored in a variable called 'jsonData'
+  // Find the container where the table will be appended
+  const container = $('#Pricing');
+
+  // Create the table element
+  const table = $('<table>');
+
+  // Create the table header row element
+  const headerRow = $('<tr>');
+
+  // Iterate over the keys of the first object in the JSON data to create the table headers
+  Object.keys(jsonData[Object.keys(jsonData)[0]].value.properties).forEach(
+    function (key) {
+      const headerCell = $('<th>').text(key);
+
+      headerRow.append(headerCell);
+    }
+  );
+
+  // Append the table header row to the table
+  table.append(headerRow);
+
+  // Iterate over the JSON data to create the table rows
+  Object.keys(jsonData).forEach(function (key) {
+    const row = jsonData[key].value.properties;
+
+    const tableRow = $('<tr>');
+
+    // Iterate over the properties of each row to create the table cells
+    row &&
+      Object.keys(row).forEach(function (prop) {
+        const cell = $('<td>').text(row[prop][0][0]);
+
+        tableRow.append(cell);
+      });
+
+    // Append the table row to the table
+    table.append(tableRow);
+  });
+
+  console.log(table);
+  // Append the table to the container
+  container.append(table);
+}
+
+export function replaceElement(selector) {
+  const oldElement = document.getElementById(selector);
+
+  console.log(oldElement);
+  const newDiv = document.createElement('div');
+
+  oldElement?.append(`<p>Here is an equation: \(E = mc^2\)</p>`);
+  // if (oldElement) {
+  //   oldElement.replaceWith(newElement);
+  // }
+}
 export function createTableOfContents(parentSelector = '') {
   let element;
   let title;
@@ -55,9 +112,7 @@ export function createTableOfContents(parentSelector = '') {
   });
 
   let tableOfContents =
-    "<nav role='navigation' class='table-of-contents'>" +
-    '<h2>Table of Contents:</h2>' +
-    '<ul>';
+    "<nav role='navigation' class='table-of-contents'>" + '<ul>';
 
   // Only show the table of contents if there are headings in the document.
   if (allLines) {

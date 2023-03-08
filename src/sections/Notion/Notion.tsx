@@ -3,7 +3,15 @@ import 'react-notion/src/styles.css';
 import 'prismjs/themes/prism-tomorrow.css';
 import { NotionRenderer } from 'react-notion';
 import { useQuery } from 'react-query';
-import { createTableOfContents, fetchPageBlockFromNotion } from '../../helpers';
+import MathComponent from 'react-mathjax2';
+import {
+  createTableFromTabel,
+  createTableOfContents,
+  fetchPageBlockFromNotion,
+  replaceElement,
+} from '../../helpers';
+import 'katex/dist/katex.min.css';
+import { InlineMath, BlockMath } from 'react-katex';
 
 export async function getStaticProps() {
   const data = await fetch(
@@ -26,12 +34,42 @@ const Notion: React.FC = () => {
   useEffect(() => {
     if (isFetched && !isFetching) {
       createTableOfContents('.notion');
+      replaceElement('Large-Circuits');
+      createTableFromTabel(data);
     }
   }, [isFetched, isFetching]);
 
+  // const updatedContent =
+  //   data &&
+  //   Object.values(data).reduce((acc, block) => {
+  //     if (block.value.type === 'equation' && block.value.properties?.title) {
+  //       console.log(block.value);
+
+  //       return {
+  //         ...acc,
+  //         [block.value.id]: {
+  //           ...block,
+  //           value: {
+  //             ...block.value,
+  //             properties: {
+  //               title: <InlineMath math={block.value.properties?.title} />,
+  //             },
+  //           },
+  //         },
+  //       };
+  //     }
+
+  //     return {
+  //       ...acc,
+  //       [block.value.id]: block,
+  //     };
+  //   }, {});
+
+  console.log(data);
+
   return (
     <div className="container">
-      {data && <NotionRenderer fullPage blockMap={data} />};
+      {data && <NotionRenderer blockMap={data} />}
     </div>
   );
 };

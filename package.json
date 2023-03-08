@@ -64,6 +64,8 @@
     "react-dom": "18.2.0",
     "react-i18next": "11.12.0",
     "react-input-mask": "2.0.4",
+    "react-katex": "^3.0.1",
+    "react-mathjax2": "^0.0.2",
     "react-notion": "0.10.0",
     "react-query": "3.39.3",
     "react-router-dom": "6.8.2",
