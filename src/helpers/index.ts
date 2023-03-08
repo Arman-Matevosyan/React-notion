@@ -10,11 +10,14 @@ import $ from 'jquery';
 
 const slugify = require('slugify');
 
+const pageId = '575d3ec590204c938adc349bef9cabc9';
+const baseUrl = 'https://notion-api.splitbee.io/v1';
+
 export function createTableOfContents(parentSelector = '') {
   let element;
   let title;
   let link;
-  let newLine;
+  let newLine = ''; // initialize to empty string
   let allLines = '';
 
   const titleSelectors = `${parentSelector}-h1, ${parentSelector}-h2, ${parentSelector}-h3`;
@@ -57,7 +60,8 @@ export function createTableOfContents(parentSelector = '') {
     '<ul>';
 
   // Only show the table of contents if there are headings in the document.
-  if (newLine) {
+  if (allLines) {
+    // use allLines instead of newLine to check if there are headings
     tableOfContents += allLines;
     tableOfContents += '</ul>' + '</nav>';
     if (parentSelector) {
@@ -67,3 +71,11 @@ export function createTableOfContents(parentSelector = '') {
 
   return tableOfContents;
 }
+
+export const fetchPageBlockFromNotion = async () => {
+  const res = await fetch(`${baseUrl}/page/${pageId}`);
+
+  const data = res.json();
+
+  return data;
+};

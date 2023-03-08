@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import 'react-notion/src/styles.css';
 import 'prismjs/themes/prism-tomorrow.css';
 import { NotionRenderer } from 'react-notion';
-import { createTableOfContents } from '../../helpers';
+import { useQuery } from 'react-query';
+import { createTableOfContents, fetchPageBlockFromNotion } from '../../helpers';
 
 export async function getStaticProps() {
   const data = await fetch(
@@ -18,32 +19,19 @@ export async function getStaticProps() {
 }
 
 const Notion: React.FC = () => {
-  const [blockMap, setBlockMap] = useState(null);
+  const { data, isFetched, isFetching } = useQuery('blocks', () =>
+    fetchPageBlockFromNotion()
+  );
 
   useEffect(() => {
-    async function fetchPageData() {
-      const recordMap = await getStaticProps();
-
-      setBlockMap(recordMap);
-    }
-
-    fetchPageData();
-  }, []);
-
-  useEffect(() => {
-    setTimeout(() => {
+    if (isFetched && !isFetching) {
       createTableOfContents('.notion');
-    }, 1000);
-  }, []);
+    }
+  }, [isFetched, isFetching]);
 
   return (
     <div className="container">
-      <div className="notion">
-        {blockMap?.props.blockMap && (
-          <NotionRenderer fullPage blockMap={blockMap.props.blockMap} />
-        )}
-        ;
-      </div>
+      {data && <NotionRenderer fullPage blockMap={data} />};
     </div>
   );
 };
