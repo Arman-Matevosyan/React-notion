@@ -1,0 +1,28 @@
+{
+    "compilerOptions": {
+      "target": "ESNext",
+      "module": "umd",
+      "lib": [
+        "ESNext",
+        "dom",
+      ],
+      "types": ["jest"],
+      "jsx": "react",
+      "noEmit": true,    
+      "sourceMap": true,
+      "strict": true,
+      "noImplicitAny": true,
+      "strictNullChecks": true,
+     
+      "moduleResolution": "node",
+      "forceConsistentCasingInFileNames": true,
+      "esModuleInterop": true
+    },
+    "exclude": ["node_modules", "build", "coverage", "webpack.*.js", "*.config.js", "*.test.ts*"],
+    "include": ["src", "typings"],
+    "ts-node": {
+      "compilerOptions": {
+        "module": "CommonJS"
+      }
+    }
+  }
