@@ -14,48 +14,31 @@ const pageId = '575d3ec590204c938adc349bef9cabc9';
 const baseUrl = 'https://notion-api.splitbee.io/v1';
 
 export function createTableFromTabel(jsonData) {
-  // Assume that the JSON data is stored in a variable called 'jsonData'
-  // Find the container where the table will be appended
-  const container = $('#Pricing');
-
-  // Create the table element
-  const table = $('<table>');
-
-  // Create the table header row element
-  const headerRow = $('<tr>');
-
-  // Iterate over the keys of the first object in the JSON data to create the table headers
-  Object.keys(jsonData[Object.keys(jsonData)[0]].value.properties).forEach(
-    function (key) {
-      const headerCell = $('<th>').text(key);
-
-      headerRow.append(headerCell);
-    }
+  const newData = Object.values(jsonData).filter(
+    (item) => item.value.type === 'table_row'
   );
 
-  // Append the table header row to the table
-  table.append(headerRow);
+  const container = $('#Pricing');
+  const table = $('<table>');
 
-  // Iterate over the JSON data to create the table rows
-  Object.keys(jsonData).forEach(function (key) {
-    const row = jsonData[key].value.properties;
+  newData.forEach(function (key, index) {
+    const row = key.value.properties;
+
+    const [klpe] = row.kLPe || [null];
 
     const tableRow = $('<tr>');
 
-    // Iterate over the properties of each row to create the table cells
-    row &&
-      Object.keys(row).forEach(function (prop) {
-        const cell = $('<td>').text(row[prop][0][0]);
+    tableRow.append($('<td>').text(klpe));
 
-        tableRow.append(cell);
-      });
+    Object.values(row).forEach(function ([value], index) {
+      if (value !== klpe) {
+        tableRow.append($('<td>').text(value));
+      }
+    });
 
-    // Append the table row to the table
     table.append(tableRow);
   });
 
-  console.log(table);
-  // Append the table to the container
   container.append(table);
 }
 
