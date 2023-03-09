@@ -100,15 +100,27 @@ export function mathEquation(data) {
 
   div.addClass('equation-class');
   mathSpan.addClass('math-equation');
+  mathSpan.css({
+    color: 'black',
+    display: 'block',
+    margin: '1em 0',
+    'text-align': 'center',
+    'font-size': '21px',
+  });
+
   const mathEquation = filteredData[0].value.properties.title[0][0];
 
   katex.render(mathEquation, mathSpan[0]);
   div.append(mathSpan[0]);
 
-  const container = $('#Large-Circuits');
+  const container = $('#Pricing');
 
-  console.log(container);
-  container.append(div);
+  div.css({
+    display: 'flex',
+    'justify-content': 'center',
+  });
+
+  container.prepend(div);
 }
 export function createTableOfContents(parentSelector = '') {
   let element;
