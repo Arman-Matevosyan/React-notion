@@ -7,13 +7,14 @@
  * @see: Used in https://atila.ca/blog/tomiwa/how-to-embed-a-notion-page-in-a-react-website/
  */
 import $ from 'jquery';
+import katex from 'katex';
 
 const slugify = require('slugify');
 
 const pageId = '575d3ec590204c938adc349bef9cabc9';
 const baseUrl = 'https://notion-api.splitbee.io/v1';
 
-export function createTableFromTabel(jsonData) {
+export function createTableFromTable(jsonData) {
   const newData = Object.values(jsonData).filter(
     (item) => item.value.type === 'table_row'
   );
@@ -28,6 +29,7 @@ export function createTableFromTabel(jsonData) {
 
     const tableRow = $('<tr>');
 
+    tableRow.addClass('table-row');
     tableRow.append($('<td>').text(klpe));
 
     Object.values(row).forEach(function ([value], index) {
@@ -42,16 +44,71 @@ export function createTableFromTabel(jsonData) {
   container.append(table);
 }
 
-export function replaceElement(selector) {
-  const oldElement = document.getElementById(selector);
+export function createToggle(data) {
+  const idsMapping = [];
 
-  console.log(oldElement);
-  const newDiv = document.createElement('div');
+  for (const [key, value] of Object.entries(data)) {
+    if (
+      value.value.properties?.title &&
+      value.value.properties?.title[0][0]
+        .toLowerCase()
+        .includes('getting started')
+    ) {
+      for (let i = 0; i < value.value.content.length; i++) {
+        idsMapping.push(value.value.content[i]);
+      }
+    }
+  }
+  const foundElements = [];
 
-  oldElement?.append(`<p>Here is an equation: \(E = mc^2\)</p>`);
-  // if (oldElement) {
-  //   oldElement.replaceWith(newElement);
-  // }
+  idsMapping.forEach((id) => {
+    const element = data[id];
+
+    if (element) {
+      foundElements.push(element);
+    }
+  });
+
+  const parentSelector = $('#Getting-Started');
+
+  const newDiv = $('<div>');
+
+  newDiv.addClass('getting-started-content');
+  newDiv.css({
+    display: 'none',
+    width: '1000px',
+    height: '100px',
+    'background-color': 'black',
+  });
+
+  parentSelector.append(newDiv);
+
+  parentSelector.click(function () {
+    newDiv.toggle();
+  });
+
+  console.log(foundElements);
+}
+
+export function mathEquation(data) {
+  const filteredData = Object.values(data).filter(
+    (item) => item.value.type === 'equation'
+  );
+
+  const div = $('<div>');
+  const mathSpan = $(`span`);
+
+  div.addClass('equation-class');
+  mathSpan.addClass('math-equation');
+  const mathEquation = filteredData[0].value.properties.title[0][0];
+
+  katex.render(mathEquation, mathSpan[0]);
+  div.append(mathSpan[0]);
+
+  const container = $('#Large-Circuits');
+
+  console.log(container);
+  container.append(div);
 }
 export function createTableOfContents(parentSelector = '') {
   let element;
