@@ -1,0 +1,1 @@
+export { getPageDataFromPageId } from './utils';
