@@ -9,6 +9,8 @@
 import $ from 'jquery';
 import katex from 'katex';
 
+hljs = require('highlight.js/lib/common');
+
 const slugify = require('slugify');
 
 const pageId = '575d3ec590204c938adc349bef9cabc9';
@@ -88,20 +90,14 @@ export function createToggle(data) {
       const codeBlock = $('<code>');
 
       codeBlock.text(codeTitle);
-      codeBlock.addClass(`"notion-code" + "language-"${codeTitle}`);
-      codePre.addClass(`"notion-code" + "language-"${codeTitle}`);
+      codeBlock.addClass(`language-${codeLanguage}`);
+      codeBlock.addClass('notion-code');
 
-      // const codeBlock = `<pre class><code class=${codeTitle}>${codeTitle}</code></pre>`;
+      codePre.addClass('notion-code');
+      codePre.addClass(`language-${codeLanguage}`);
 
-      // codeBlock.css({
-      //   'white-space': 'pre-wrap',
-      //   'caret-color': 'rgb(55, 53, 47)',
-      //   padding: '3px 2px',
-      //   'font-size': '16px',
-      //   color: ' rgb(55, 53, 47)',
-      // });
+      hljs.highlightBlock(codeBlock[0]);
 
-      // codeContainer.append(codeBlock);
       codePre.append(codeBlock);
       newDiv.append(codePre);
     } else {
