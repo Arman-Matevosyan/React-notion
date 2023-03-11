@@ -1,3 +1,6 @@
+/* eslint-disable fp/no-loops */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable max-depth */
 /* eslint-disable max-lines */
 /* eslint-disable fp/no-mutation */
 /* eslint-disable fp/no-this */
@@ -95,10 +98,10 @@ export function createToggle(data: BlockMapType, containerSelector: string) {
     height: '10px',
     'border-top': '2px solid #000',
     'border-right': '2px solid #000',
+    'border-bottom': '2px solid transparent',
+    'border-left': '2px solid transparent',
     transform: 'rotate(45deg)',
     transition: 'transform 0.3s ease-in-out',
-    'margin-left': '0px',
-    'margin-bottom': '5px',
   });
 
   const newDiv = $('<div>').addClass('getting-started-content').css({
@@ -127,9 +130,9 @@ export function createToggle(data: BlockMapType, containerSelector: string) {
       newDiv.append(codePre);
       Prism.highlightAll();
     } else {
-      const title = item.value.properties.title[0][0];
+      const titleArr = item.value.properties.title;
 
-      const titleContainer = $(`<p>${title}</p>`).css({
+      const titleContainer = $('<p>').css({
         'white-space': 'pre-wrap',
         'caret-color': 'rgb(55, 53, 47)',
         padding: '3px 2px',
@@ -137,6 +140,25 @@ export function createToggle(data: BlockMapType, containerSelector: string) {
         color: 'rgb(55, 53, 47)',
         'font-weight': 'normal',
       });
+
+      for (const title of titleArr) {
+        if (Array.isArray(title)) {
+          const linkTitle = title[0];
+          const linkUrl = title[1];
+
+          if (linkUrl) {
+            const link = $('<a>').attr('href', linkUrl[0][1]).text(linkTitle);
+
+            titleContainer.append(link);
+          } else {
+            const text = $('<span>').text(linkTitle);
+
+            titleContainer.append(text);
+          }
+        } else {
+          titleContainer.append(title);
+        }
+      }
 
       newDiv.append(titleContainer);
     }
