@@ -1,15 +1,7 @@
-/**
- *
- * @param parentSelector: Where to insert the new table of contents.
- * Leave blank if you only wnat to return the table of contents without
- * automatically prepending to the parent component.
- * @see: https://css-tricks.com/automatic-table-of-contents/
- * @see: Used in https://atila.ca/blog/tomiwa/how-to-embed-a-notion-page-in-a-react-website/
- */
 import $ from 'jquery';
 import katex from 'katex';
 
-hljs = require('highlight.js/lib/common');
+const Prism = require('prismjs');
 
 const slugify = require('slugify');
 
@@ -72,8 +64,16 @@ export function createToggle(data) {
   });
 
   const parentSelector = $('#Getting-Started');
-
+  const arrowDiv = $('<div>');
+  const arrowSpan = $('<span>');
   const newDiv = $('<div>');
+
+  arrowDiv.css({
+    cursor: 'pointer',
+    position: 'absolute',
+    height: '40px',
+    'margin-left': '-15px',
+  });
 
   newDiv.addClass('getting-started-content');
   newDiv.css({
@@ -84,7 +84,7 @@ export function createToggle(data) {
   foundElements.forEach(function (item) {
     if (item.value.properties.language) {
       // If the properties include a language, render a <pre> tag with <code> inside
-      const codeTitle = item.value.properties.title[0][0];
+      const codeTitle = item.value.properties.title[0];
       const codeLanguage = item.value.properties.language[0][0];
       const codePre = $('<pre>');
       const codeBlock = $('<code>');
@@ -95,11 +95,13 @@ export function createToggle(data) {
 
       codePre.addClass('notion-code');
       codePre.addClass(`language-${codeLanguage}`);
+      codeBlock.css({
+        'font-size': '0.5em',
+      });
 
-      hljs.highlightBlock(codeBlock[0]);
-
-      codePre.append(codeBlock);
+      codePre.append(codeBlock[0]);
       newDiv.append(codePre);
+      Prism.highlightAll();
     } else {
       // Otherwise, just render the title in a <div>
       const title = item.value.properties.title[0][0];
@@ -112,19 +114,43 @@ export function createToggle(data) {
         padding: '3px 2px',
         'font-size': '16px',
         color: ' rgb(55, 53, 47)',
+        'font-weight': 'normal',
       });
 
       newDiv.append(titleContainer);
     }
   });
 
-  parentSelector.append(newDiv);
-
-  parentSelector.click(function () {
-    newDiv.toggle();
+  arrowDiv.append(arrowSpan);
+  arrowSpan.css({
+    display: 'inline-block',
+    width: '10px',
+    height: '10px',
+    'border-top': '2px solid #000',
+    'border-right': '2px solid #000',
+    transform: 'rotate(45deg)',
+    transition: 'transform 0.3s ease-in-out',
+    'margin-left': '0px',
+    'margin-bottom': '5px',
   });
 
-  console.log(foundElements);
+  arrowDiv.click(function () {
+    newDiv.toggle();
+    if (arrowSpan.hasClass('rotated')) {
+      arrowSpan.removeClass('rotated');
+      arrowSpan.css({
+        transform: 'rotate(45deg)',
+      });
+    } else {
+      arrowSpan.addClass('rotated');
+      arrowSpan.css({
+        transform: 'rotate(135deg)',
+      });
+    }
+  });
+
+  parentSelector.prepend(arrowDiv);
+  parentSelector.append(newDiv);
 }
 
 export function mathEquation(data) {
