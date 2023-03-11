@@ -77,8 +77,49 @@ export function createToggle(data) {
   newDiv.css({
     display: 'none',
     width: '1000px',
-    height: '100px',
-    'background-color': 'black',
+  });
+
+  foundElements.forEach(function (item) {
+    if (item.value.properties.language) {
+      // If the properties include a language, render a <pre> tag with <code> inside
+      const codeTitle = item.value.properties.title[0][0];
+      const codeLanguage = item.value.properties.language[0][0];
+      const codePre = $('<pre>');
+      const codeBlock = $('<code>');
+
+      codeBlock.text(codeTitle);
+      codeBlock.addClass(`"notion-code" + "language-"${codeTitle}`);
+      codePre.addClass(`"notion-code" + "language-"${codeTitle}`);
+
+      // const codeBlock = `<pre class><code class=${codeTitle}>${codeTitle}</code></pre>`;
+
+      // codeBlock.css({
+      //   'white-space': 'pre-wrap',
+      //   'caret-color': 'rgb(55, 53, 47)',
+      //   padding: '3px 2px',
+      //   'font-size': '16px',
+      //   color: ' rgb(55, 53, 47)',
+      // });
+
+      // codeContainer.append(codeBlock);
+      codePre.append(codeBlock);
+      newDiv.append(codePre);
+    } else {
+      // Otherwise, just render the title in a <div>
+      const title = item.value.properties.title[0][0];
+
+      const titleContainer = $(`<p>${title}</p>`);
+
+      titleContainer.css({
+        'white-space': 'pre-wrap',
+        'caret-color': 'rgb(55, 53, 47)',
+        padding: '3px 2px',
+        'font-size': '16px',
+        color: ' rgb(55, 53, 47)',
+      });
+
+      newDiv.append(titleContainer);
+    }
   });
 
   parentSelector.append(newDiv);
@@ -96,10 +137,9 @@ export function mathEquation(data) {
   );
 
   const div = $('<div>');
-  const mathSpan = $(`span`);
+  const mathSpan = $(`<p>`);
 
   div.addClass('equation-class');
-  mathSpan.addClass('math-equation');
   mathSpan.css({
     color: 'black',
     display: 'block',

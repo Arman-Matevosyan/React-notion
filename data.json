@@ -1,0 +1,129 @@
+[
+    {
+        "role": "reader",
+        "value": {
+            "id": "4331e480-de3f-4858-bf66-adc7191c1abc",
+            "version": 5,
+            "type": "text",
+            "properties": {
+                "title": [
+                    [
+                        "Bluequbit SDK allows you to use your favorite quantum libs such as qiskit and cirq to construct circuits and run them on large CPU / GPU and even QPU machines in the cloud."
+                    ]
+                ]
+            }
+        }
+    },
+    {
+        "role": "reader",
+        "value": {
+            "id": "e92d2577-3437-4e4f-ab44-37c7cd01beca",
+            "version": 5,
+            "type": "text",
+            "properties": {
+                "title": [
+                    [
+                        "And all you need is only 3 lines of bluequbit code!"
+                    ]
+                ]
+            },
+        }
+    },
+    {
+        "role": "reader",
+        "value": {
+            "id": "f58897ca-cedf-42c6-9b78-1c5972c5ec64",
+            "version": 5,
+            "type": "text",
+            "properties": {
+                "title": [
+                    [
+                        "First install the BlueQubit SDK:"
+                    ]
+                ]
+            }
+        }
+    },
+    {
+        "role": "reader",
+        "value": {
+            "id": "807ebc60-1b48-4c40-a0b8-bad6cdd4344b",
+            "version": 5,
+            "type": "code",
+            "properties": {
+                "title": [
+                    [
+                        "pip install bluequbit"
+                    ]
+                ],
+                "language": [
+                    [
+                        "JavaScript"
+                    ]
+                ]
+            }
+        }
+    },
+    {
+        "role": "reader",
+        "value": {
+            "id": "b9eeb793-5057-4b21-8ed2-24fe7bf9a235",
+            "version": 5,
+            "type": "text",
+            "properties": {
+                "title": [
+                    [
+                        "Once you open a (free) account at "
+                    ],
+                    [
+                        "app.bluequbit.io",
+                        [
+                            [
+                                "a",
+                                "https://app.bluequbit.io"
+                            ]
+                        ]
+                    ],
+                    [
+                        " you will get a unique token.  You can see it in the top right corner in the app."
+                    ]
+                ]
+            },
+        }
+    },
+    {
+        "role": "reader",
+        "value": {
+            "id": "a37380f9-cebf-4be8-92c9-026f5cb44c35",
+            "version": 5,
+            "type": "text",
+            "properties": {
+                "title": [
+                    [
+                        "You can now use your token to submit quantum jobs to BlueQubit!"
+                    ]
+                ]
+            },
+        }
+    },
+    {
+        "role": "reader",
+        "value": {
+            "id": "67d30eaf-6d56-42f2-9bd1-1d55b7e5ae37",
+            "version": 5,
+            "type": "code",
+            "properties": {
+                "title": [
+                    [
+                        "import bluequbit\n...\n# building the qiskit_circuit\n...\nbq = bluequbit.init(TOKEN)\nresult = bq.run(qiskit_circuit, device='gpu') # device can also be 'cpu' or 'quantum'"
+                    ]
+                ],
+                "language": [
+                    [
+                        "Python"
+                    ]
+                ]
+            },
+        }
+    }
+]
