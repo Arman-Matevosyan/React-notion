@@ -1,0 +1,118 @@
+import { BlockMapType } from 'react-notion';
+
+/* eslint-disable max-lines */
+export const blockMapDataMock: BlockMapType = {
+  '575d3ec5-9020-4c93-8adc-349bef9cabc9': {
+    role: 'reader',
+    value: {
+      id: '575d3ec5-9020-4c93-8adc-349bef9cabc9',
+      version: 82,
+      type: 'page',
+      properties: {
+        title: [['Sample notion page ']],
+      },
+      content: ['cccceca0-6dac-4c08-8fcb-69b00ba20d1f'],
+      format: {
+        page_icon: '🚀',
+        page_cover: '/images/page-cover/webb1.jpg',
+        page_full_width: false,
+        page_small_text: false,
+        page_cover_position: 0.5,
+      },
+      permissions: [],
+      created_time: 1678164818104,
+      last_edited_time: 1678168140576,
+      parent_id: '48dc0416-bb0c-4512-9a27-9a99101e4825',
+      parent_table: 'block',
+      alive: true,
+      created_by_table: 'notion_user',
+      created_by_id: '28ecceb2-2a5a-4d18-94eb-e778572a06a8',
+      last_edited_by_table: 'notion_user',
+      last_edited_by_id: '28ecceb2-2a5a-4d18-94eb-e778572a06a8',
+      space_id: '205ec137-2a8a-4bb3-9010-fca2b64424b9',
+    },
+  },
+  '48dc0416-bb0c-4512-9a27-9a99101e4825': {
+    role: 'reader',
+    value: {
+      id: '48dc0416-bb0c-4512-9a27-9a99101e4825',
+      version: 126,
+      type: 'page',
+      properties: {
+        title: [['React-Notion task']],
+      },
+      content: [
+        'd5b213c4-290d-42b6-bd80-c51d8e03f109',
+        '7793d9ed-4355-42bd-a4f1-fbbd2b277d70',
+        '8a5a11a0-d271-4dc7-b35d-4c5f3472f48b',
+        'de40af07-863c-4eed-8474-88003032a928',
+        '4d828a78-91de-409f-9e7b-49fcfed03c1e',
+        'c454d5ad-ef9a-42c7-a219-911cb41283cc',
+        'd7a4f78b-77f9-489f-8d80-2a64cbe6eee9',
+        '074854a4-dbe3-49aa-a4a7-eeeb332d04c6',
+        '77cbd5bd-61c6-4ffb-8904-85328b660705',
+        '66d368e1-0416-4e47-aa4a-4be8d4d7ccec',
+        'e73c3875-1aa4-439b-8644-ea41b3c62e5e',
+        '7d4e1536-950c-4195-ac44-3e3031cbde30',
+        'ffbab5ca-904d-4f9f-950c-bb2f9bc19895',
+        '575d3ec5-9020-4c93-8adc-349bef9cabc9',
+        '7eb81712-4932-470c-85c5-263b4afb4500',
+      ],
+      format: {
+        page_icon: '📹',
+        page_cover: '/images/page-cover/webb3.jpg',
+        page_cover_position: 0.5,
+      },
+      permissions: [
+        {
+          role: 'editor',
+          type: 'user_permission',
+        },
+        {
+          role: 'reader',
+          type: 'public_permission',
+        },
+        {
+          role: 'reader',
+          type: 'user_permission',
+        },
+        {
+          role: 'reader',
+          type: 'user_permission',
+        },
+      ],
+      created_time: 1674498264598,
+      last_edited_time: 1678175556879,
+      parent_id: '2b3dc0d1-408c-4ab8-b03e-a576e79dc9b6',
+      parent_table: 'block',
+      alive: true,
+      created_by_table: 'notion_user',
+      created_by_id: '28ecceb2-2a5a-4d18-94eb-e778572a06a8',
+      last_edited_by_table: 'notion_user',
+      last_edited_by_id: '28ecceb2-2a5a-4d18-94eb-e778572a06a8',
+      space_id: '205ec137-2a8a-4bb3-9010-fca2b64424b9',
+    },
+  },
+  'cccceca0-6dac-4c08-8fcb-69b00ba20d1f': {
+    role: 'reader',
+    value: {
+      id: 'cccceca0-6dac-4c08-8fcb-69b00ba20d1f',
+      version: 2,
+      type: 'column_list',
+      content: [
+        '27f1f1e2-b15d-4231-8738-47891bb9e977',
+        '3cf2a42d-bcdd-4899-b866-b6f9a695f9fc',
+      ],
+      created_time: 1678164818104,
+      last_edited_time: 1678164818127,
+      parent_id: '575d3ec5-9020-4c93-8adc-349bef9cabc9',
+      parent_table: 'block',
+      alive: true,
+      created_by_table: 'notion_user',
+      created_by_id: '28ecceb2-2a5a-4d18-94eb-e778572a06a8',
+      last_edited_by_table: 'notion_user',
+      last_edited_by_id: '28ecceb2-2a5a-4d18-94eb-e778572a06a8',
+      space_id: '205ec137-2a8a-4bb3-9010-fca2b64424b9',
+    },
+  },
+};

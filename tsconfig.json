@@ -6,7 +6,7 @@
         "ESNext",
         "dom",
       ],
-      "types": ["jest"],
+      "types": ["jest", "node"],
       "jsx": "react",
       "noEmit": true,    
       "sourceMap": true,

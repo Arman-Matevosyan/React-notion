@@ -49,7 +49,7 @@ export function createTableFromPageData(
 
     tableRow.append($('<td>').text(klpe));
 
-    Object.values(cells).forEach(function (cellValue) {
+    Object.values(cells).forEach(function (cellValue: any) {
       if (cellValue[0] !== klpe) {
         tableRow.append($('<td>').text(cellValue));
       }
@@ -80,7 +80,7 @@ export function createToggle(data: BlockMapType, containerSelector: string) {
 
       return title && title.includes('getting started');
     })
-    .flatMap((item) => item.value.content.map((id) => data[id]))
+    .flatMap((item: any) => item.value.content.map((id: string) => data[id]))
     .filter(Boolean);
 
   const parentSelector = $(containerSelector);
@@ -251,7 +251,7 @@ export function createTableOfContents(parentSelector = '') {
 
     link = element.attr('id');
     if (!link) {
-      link = slugify(title, 50);
+      link = slugify(title);
       element.attr('id', link);
     }
     if (!link) {

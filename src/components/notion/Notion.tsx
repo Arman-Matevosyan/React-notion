@@ -26,6 +26,7 @@ const Notion: React.FC<Props> = ({ data }) => {
 
   return (
     <div
+      data-testid="notion-renderer"
       style={{
         maxWidth: '100%',
       }}
