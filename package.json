@@ -55,6 +55,7 @@
     "@testing-library/react": "13.4.0",
     "@testing-library/react-hooks": "8.0.1",
     "@types/react-router-dom": "5.3.3",
+    "highlight.js": "^11.7.0",
     "icomoon-react": "3.0.0",
     "intl-messageformat": "10.3.0",
     "jest-environment-jsdom": "29.4.2",
