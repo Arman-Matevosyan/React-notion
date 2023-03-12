@@ -7,6 +7,8 @@ import { getPageDataFromPageId } from '../../utils';
 const Home: React.FC = () => {
   const { data } = useQuery('blocks', () => getPageDataFromPageId());
 
+  console.log(data);
+
   return (
     <div data-testid="Home">
       {data ? <Notion data={data} /> : <div>Loading</div>}
